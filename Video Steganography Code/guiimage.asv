@@ -1,0 +1,144 @@
+function varargout = guiimage(varargin)
+% GUIIMAGE M-file for guiimage.fig
+%      GUIIMAGE, by itself, creates a new GUIIMAGE or raises the existing
+%      singleton*.
+%
+%      H = GUIIMAGE returns the handle to a new GUIIMAGE or the handle to
+%      the existing singleton*.
+%
+%      GUIIMAGE('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in GUIIMAGE.M with the given input arguments.
+%
+%      GUIIMAGE('Property','Value',...) creates a new GUIIMAGE or raises the
+%      existing singleton*.  Starting from the left, property value pairs are
+%      applied to the GUI before guiimage_OpeningFunction gets called.  An
+%      unrecognized property name or invalid value makes property application
+%      stop.  All inputs are passed to guiimage_OpeningFcn via varargin.
+%
+%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
+%      instance to run (singleton)".
+%
+% See also: GUIDE, GUIDATA, GUIHANDLES
+
+% Edit the above text to modify the response to help guiimage
+
+% Last Modified by GUIDE v2.5 10-Feb-2006 12:23:24
+
+% Begin initialization code - DO NOT EDIT
+gui_Singleton = 1;
+gui_State = struct('gui_Name',       mfilename, ...
+                   'gui_Singleton',  gui_Singleton, ...
+                   'gui_OpeningFcn', @guiimage_OpeningFcn, ...
+                   'gui_OutputFcn',  @guiimage_OutputFcn, ...
+                   'gui_LayoutFcn',  [] , ...
+                   'gui_Callback',   []);
+if nargin & isstr(varargin{1})
+    gui_State.gui_Callback = str2func(varargin{1});
+end
+
+if nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+else
+    gui_mainfcn(gui_State, varargin{:});
+end
+% End initialization code - DO NOT EDIT
+
+
+% --- Executes just before guiimage is made visible.
+function guiimage_OpeningFcn(hObject, eventdata, handles, varargin)
+% This function has no output args, see OutputFcn.
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% varargin   command line arguments to guiimage (see VARARGIN)
+
+% Choose default command line output for guiimage
+handles.output = hObject;
+
+% Update handles structure
+guidata(hObject, handles);
+
+% UIWAIT makes guiimage wait for user response (see UIRESUME)
+% uiwait(handles.figure1);
+
+
+% --- Outputs from this function are returned to the command line.
+function varargout = guiimage_OutputFcn(hObject, eventdata, handles)
+% varargout  cell array for returning output args (see VARARGOUT);
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Get default command line output from handles structure
+varargout{1} = handles.output;
+
+
+% --- Executes on button press in Select_audio.
+function Select_audio_Callback(hObject, eventdata, handles)
+% hObject    handle to Select_audio (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+[filename, pathname] = uigetfile('*.wav', 'Pick an M-file');
+
+    if isequal(filename,0) | isequal(pathname,0)
+        
+      warndlg('File is not selected');
+      
+    else
+        
+        a = wavread(filename);
+axes(handles.one);
+
+        plot(a);
+        handles.filename=filename;
+       
+        
+    end
+ 
+
+% --- Executes on button press in Select_Image.
+function Select_Image_Callback(hObject, eventdata, handles)
+% hObject    handle to Select_Image (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+[filename, pathname] = uigetfile('*.bmp', 'Pick an Image');
+
+    if isequal(filename,0) | isequal(pathname,0)
+        
+      warndlg('File is not selected');
+      
+    else
+        
+        a = imread(filename);
+        axes(handles.one);
+
+      imshow(a);
+        handles.filename1=filename;
+       
+        
+    end
+ 
+
+% --- Executes on button press in pushbutton3.
+function pushbutton3_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+handles.filename1
+handles.filename1
+% --- Executes on button press in pushbutton4.
+function pushbutton4_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in Data_Hide.
+function Data_Hide_Callback(hObject, eventdata, handles)
+% hObject    handle to Data_Hide (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
